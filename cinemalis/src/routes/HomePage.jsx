@@ -47,8 +47,14 @@ const HomePage = () => {
           ))}
         </div>
         <div className='w-[500px] h-max bg-black bg-opacity-70'>
-          <h2 className='pl-10 text-2xl'>Opiniones</h2>
-          <Opinion />
+          <h2 className='pl-10 text-2xl'>Últimas opiniones</h2>
+          <Opinion
+            userName='El pepe'
+            movie='Eternals'
+            rating='8.5'
+            text='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident accusamus iste mollitia aliquam perspiciatis totam modi possimus voluptatem accusantium tempora!'
+            time='Hace 2 horas'
+          />
         </div>
       </div>
     </div>

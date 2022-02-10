@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* underline font-semibold bg-stone-900 mr-4 bg-opacity-50 text-xl pl-4 */
+
+.inputLabel {
+  font-weight: 600;
+  background-color: #1c1917;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  padding-left: 1rem;
+}
+
+.input {
+  color: #000;
+  padding-left: 1rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}

@@ -23,7 +23,6 @@ const Carousel = () => {
   ]
 
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [selectedImage, setSelectedImage] = useState(movieBanners[0])
 
   const selectNewBanner = (index, movieBanners, next) => {
     const condition = next
