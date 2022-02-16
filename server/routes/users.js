@@ -1,36 +1,40 @@
 const express = require('express')
 const Users = require('../services/users')
+const { isAdmin } = require('../middleware/auth')
 
 const users = app => {
   const router = express.Router()
   const usersServices = new Users()
   app.use('/users', router)
 
-  router.get('/', async (req, res) => {
+  router.get('/', isAdmin, async (req, res) => {
     const users = await usersServices.getAll()
-    return res.status(200).json(users)
+
+    if (users.err) return res.send(404).json({ success: false, users })
+    else return res.status(200).json({ success: true, users })
   })
   router.get('/:id', async (req, res) => {
     const { id } = req.params
     const user = await usersServices.get(id)
-    return res.status(200).json(user)
+
+    if (user.err) return res.status(404).json({ success: false, user })
+    else return res.status(200).json({ success: true, user })
   })
 
-  router.post('/', async (req, res) => {
-    const user = await usersServices.create(req.body)
-    return res.status(201).json(user)
-  })
-
-  router.put('/:id', async (req, res) => {
+  router.put('/:id', isAdmin, async (req, res) => {
     const { id } = req.params
     const user = await usersServices.update(id, req.body)
-    return res.status(200).json(user)
+
+    if (user.err) return res.status(40).json({ success: false, user })
+    else return res.status(200).json({ success: true, user })
   })
 
-  router.delete('/:id', async (req, res) => {
+  router.delete('/:id', isAdmin, async (req, res) => {
     const { id } = req.params
     const user = await usersServices.delete(id)
-    return res.status(200).json(user)
+
+    if (user.err) return res.status(400).json({ success: false, user })
+    else return res.status(200).json({ success: true, user })
   })
 }
 

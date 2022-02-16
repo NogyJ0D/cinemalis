@@ -4,7 +4,7 @@ import Header from './components/Header'
 
 const Layout = () => {
   return (
-    <main className='min-h-screen flex flex-col bg-gradient-to-b from-blue-700 to-fuchsia-700'>
+    <main className='min-h-screen flex flex-col font-nunito bg-gradient-to-b from-red-700 to-red-900 pb-4'>
       <Header />
       <section>
         <Outlet />

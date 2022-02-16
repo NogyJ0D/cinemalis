@@ -2,27 +2,31 @@ const UserModel = require('../models/user')
 
 class Users {
   async get (id) {
-    return await UserModel.findById(id)
+    try { return await UserModel.findById(id) } catch (err) { return { err } }
   }
 
   async getByEmail (email) {
-    return await UserModel.findOne({ email: email })
+    try { return await UserModel.findOne({ email: email }) } catch (err) { return err }
+  }
+
+  async getByUsername (userName) {
+    try { return await UserModel.findOne({ userName: userName }) } catch (err) { return { err } }
   }
 
   async getAll () {
-    return await UserModel.find()
+    try { return await UserModel.find().select(['_id', 'userName', 'email', 'role']) } catch (err) { return { err } }
   }
 
   async create (data) {
-    return await UserModel.create(data)
+    try { return await UserModel.create(data) } catch (err) { return { err } }
   }
 
   async update (id, data) {
-    return await UserModel.findByIdAndUpdate(id, data, { new: true })
+    try { return await UserModel.findByIdAndUpdate(id, data, { new: true }) } catch (err) { return { err } }
   }
 
   async delete (id) {
-    return await UserModel.findByIdAndDelete(id)
+    try { return await UserModel.findByIdAndDelete(id) } catch (err) { return { err } }
   }
 }
 

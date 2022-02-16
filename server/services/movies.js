@@ -2,23 +2,35 @@ const MovieModel = require('../models/movie')
 
 class Movies {
   async get (id) {
-    return await MovieModel.findById(id)
+    try { return await MovieModel.findById(id) } catch (err) { return { err } }
   }
 
   async getAll () {
-    return await MovieModel.find()
+    try { return await MovieModel.find().sort({ name: 1 }) } catch (err) { return { err } }
+  }
+
+  async getLast (date) {
+    try { return await MovieModel.find().sort([[date, -1]]).limit(10) } catch (err) { return { err } }
+  }
+
+  async getRanking10 (sorter) {
+    try { return await MovieModel.find().sort({ rating: sorter }).limit(10) } catch (err) { return { err } }
+  }
+
+  async getByEditorId (id) {
+    try { return await MovieModel.find({ editor: id }).sort({ name: 1 }) } catch (err) { return { err } }
   }
 
   async create (data) {
-    return await MovieModel.create(data)
+    try { return await MovieModel.create(data) } catch (err) { return { err } }
   }
 
-  async update (id, data) {
-    return await MovieModel.findByIdAndUpdate(id, data, { new: true })
+  async update (movie, editor, data) {
+    try { return await MovieModel.findOneAndUpdate({ _id: movie, editor: editor }, data, { new: true }) } catch (err) { return { err } }
   }
 
   async delete (id) {
-    return await MovieModel.findByIdAndDelete(id)
+    try { return await MovieModel.findByIdAndDelete(id) } catch (err) { return { err } }
   }
 }
 

@@ -3,12 +3,22 @@ const { jwtSecret } = require('../config')
 
 // Paso 1: Comprobar rol
 const isRegular = (req, res, next) => {
-  req.neededRole = 'REGULAR'
+  req.neededRole = 1
+  verifyToken(req, res, next)
+}
+
+const isEditor = (req, res, next) => {
+  req.neededRole = 2
   verifyToken(req, res, next)
 }
 
 const isAdmin = (req, res, next) => {
-  req.neededRole = 'ADMIN'
+  req.neededRole = 3
+  verifyToken(req, res, next)
+}
+
+const isOwner = (req, res, next) => {
+  req.neededRole = 4
   verifyToken(req, res, next)
 }
 
@@ -17,10 +27,13 @@ const verifyToken = (req, res, next) => {
   const auth = req.header('Authorization')
   const cookies = req.cookies
 
+  // console.log(auth, cookies)
+
   if (!auth && !cookies.token) {
     return res.status(403).json({
-      status: 'No-Auth',
-      message: 'A token is required for this process.'
+      success: false,
+      status: 'Sin autenticación',
+      message: 'Se requiere un token para este proceso.'
     })
   }
 
@@ -39,23 +52,26 @@ const handleToken = (token, req, res, next) => {
     req.user = decoded
     return validateRole(req, res, next)
   } catch (err) {
-    console.log('JWT error:', err.message)
     return res.status(403).json({
-      status: 'Expired',
-      message: 'A valid token is required for this process.'
+      success: false,
+      status: 'Expirado',
+      message: 'Se requiere un token válido para este proceso.'
     })
   }
 }
 
 // Paso 4: validar rol
 const validateRole = (req, res, next) => {
-  if (req.user.role === 'ADMIN' || req.user.role === req.neededRole) {
-    next()
+  // console.log(req.user.role, req.neededRole)
+
+  if (req.user.role >= req.neededRole) {
+    return next()
   }
   return res.status(403).json({
-    status: 'Insufficient permissions',
-    message: 'A superior role is required for this action.'
+    success: false,
+    status: 'Permisos insuficientes',
+    message: 'Se requiere un rol superior para este proceso.'
   })
 }
 
-module.exports = { isRegular, isAdmin }
+module.exports = { isRegular, isEditor, isAdmin, isOwner }

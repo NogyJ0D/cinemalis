@@ -9,13 +9,63 @@ function auth (app) {
   router.post('/login', async (req, res) => {
     const { email, password } = req.body
     const response = await authService.login(email, password)
+
+    if (response.success === false) return res.status(401).json({ success: false, response })
+    else {
+      return res
+        .status(200)
+        .cookie('token', response.token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none'
+        })
+        .json({ success: true, response })
+    }
+  })
+
+  router.post('/tokenlogin', async (req, res) => {
+    const cookies = req.cookies
+    const response = await authService.tokenLogin(cookies)
+
+    if (response.success === false) return res.status(401).json({ success: false, response })
+    else {
+      return res
+        .status(200)
+        .cookie('token', response.newToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none'
+        })
+        .json({ success: true, response })
+    }
+  })
+
+  router.post('/signup', async (req, res) => {
+    const user = req.body
+    const response = await authService.signup(user)
+
+    if (response.success === false) return res.status(403).json({ success: false, response })
+    else {
+      return res
+        .status(200)
+        .cookie('token', response.token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none'
+        })
+        .json({ success: true, response })
+    }
+  })
+
+  router.post('/logout', (req, res) => {
     return res
-      .cookie('token', response.token, {
+      .cookie('token', '', {
         httpOnly: true,
         secure: true,
-        sameSite: 'none'
+        sameSite: 'none',
+        expires: new Date()
       })
-      .json(response)
+      .json({ loggedOut: true })
   })
 }
 

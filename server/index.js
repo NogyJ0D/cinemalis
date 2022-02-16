@@ -8,9 +8,10 @@ const { connection } = require('./config/db')
 connection()
 
 // Routes
-const users = require('./routes/users')
-const movies = require('./routes/movies')
 const auth = require('./routes/auth')
+const movies = require('./routes/movies')
+const reviews = require('./routes/reviews')
+const users = require('./routes/users')
 
 const app = express()
 
@@ -25,9 +26,10 @@ app.use(
 app.use(cookies())
 
 // Usar las rutas
-users(app)
-movies(app)
 auth(app)
+movies(app)
+reviews(app)
+users(app)
 
 app.get('/', (req, res) => {
   return res.status(200).send('Index page')

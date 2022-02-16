@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/NogyJ0D/cinemalis#readme",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "standard": "*"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
