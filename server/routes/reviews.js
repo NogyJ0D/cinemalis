@@ -21,9 +21,9 @@ const reviews = app => {
     else return res.status(200).json({ success: true, reviews })
   })
 
-  router.get('/get/:whatId/:id', async (req, res) => {
-    const { whatId, id } = req.params
-    const reviews = await reviewsServices.getBy(whatId, id)
+  router.get('/get/:filter/:id', async (req, res) => {
+    const { filter, id } = req.params
+    const reviews = await reviewsServices.getByFilter(filter, id)
 
     if (reviews.err) return res.status(404).json({ success: false, reviews })
     else return res.status(200).json({ success: true, reviews })

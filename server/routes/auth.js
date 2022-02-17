@@ -23,7 +23,7 @@ function auth (app) {
     }
   })
 
-  router.post('/tokenlogin', async (req, res) => {
+  router.get('/tokenlogin', async (req, res) => {
     const cookies = req.cookies
     const response = await authService.tokenLogin(cookies)
 
