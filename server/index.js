@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
   return res.status(200).send('Index page')
 })
 
-app.listen(config.port, () => {
+const PORT = process.env.PORT || 4000
+app.listen(PORT, () => {
   console.log(`Servidor: http://localhost:${config.port}`)
 })
