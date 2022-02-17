@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import axiosRequest from '../../services/axiosRequest'
 
@@ -7,12 +6,14 @@ const ChangeRole = ({ userRole }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
   const onSubmit = async ({ userId, newRole }) => {
-    const response = await axiosRequest(
-      `http://localhost:4000/users/${userId}`, 'PUT', { role: newRole }
-    )
-    response.success
-      ? window.location.reload()
-      : window.alert('Error de changerole')
+    if (userRole >= 3) {
+      const response = await axiosRequest(
+        `http://localhost:4000/users/${userId}`, 'PUT', { role: newRole }
+      )
+      response.success
+        ? window.location.reload()
+        : window.alert('Error de changerole')
+    }
   }
 
   return (

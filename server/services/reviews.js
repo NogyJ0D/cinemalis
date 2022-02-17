@@ -5,13 +5,9 @@ class Reviews {
     try { return await ReviewModel.findById(id) } catch (err) { return { err } }
   }
 
-  async getBy (whatId, id) {
-    try { return await ReviewModel.find({ [whatId]: id }).sort({ date: -1 }) } catch (err) { return { err } }
+  async getByFilter (filter, id) {
+    try { return await ReviewModel.find({ [filter]: id }).sort({ date: -1 }) } catch (err) { return { err } }
   }
-
-  // async getByUserId (id) {
-  //   try { return await ReviewModel.find({ userId: id }).sort({ date: -1 }) } catch (err) { return { err } }
-  // }
 
   async getAll () {
     try { return await ReviewModel.find().sort({ date: -1 }) } catch (err) { return { err } }

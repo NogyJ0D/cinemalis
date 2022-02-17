@@ -3,7 +3,7 @@ require('dotenv').config()
 const config = {
   mode: process.env.MODE,
   jwtSecret: process.env.JWT_SECRET,
-  port: process.env.PORT,
+  port: process.env.PORT || 4000,
   dbPassword: process.env.DB_PASSWORD,
   dbUsername: process.env.DB_USERNAME,
   dbHost: process.env.DB_HOST,

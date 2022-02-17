@@ -9,10 +9,12 @@ const MyReviews = ({ userRole }) => {
   const [myMovies, setMyMovies] = useState([])
 
   useEffect(async () => {
-    const response = await axiosRequest(`http://localhost:4000/movies/editor/${user.id}`)
-    response.success
-      ? setMyMovies(response.movies)
-      : window.alert('Error de mis películas.')
+    if (user.role >= 2) {
+      const response = await axiosRequest(`http://localhost:4000/movies/editor/${user.id}`)
+      response.success
+        ? setMyMovies(response.movies)
+        : window.alert('Error de mis películas.')
+    }
   }, [])
 
   return (

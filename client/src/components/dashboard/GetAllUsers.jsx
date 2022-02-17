@@ -7,7 +7,6 @@ const GetAllUsers = ({ userRole }) => {
   useEffect(async () => {
     if (userRole >= 3) {
       const response = await axiosRequest('http://localhost:4000/users', 'GET')
-      console.log(response)
       response.success
         ? setUsers(response.users)
         : window.alert('Error de getallusers')

@@ -11,14 +11,16 @@ const AddMovie = ({ userRole }) => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const onSubmit = async ({ name, description, year, rating, banner, poster }) => {
-    const response = await axiosRequest(
-      'http://localhost:4000/movies/create', 'POST', { name, description, year, rating, banner, poster, editor: user.id }
-    )
-    response.success
-      ? window.confirm('¿Desea ir a la página de la película?')
-          ? navigate(`/movies/${response.movie._id}`)
-          : navigate(0)
-      : window.alert('Error de addmovie')
+    if (user.role >= 2) {
+      const response = await axiosRequest(
+        'http://localhost:4000/movies/create', 'POST', { name, description, year, rating, banner, poster, editor: user.id }
+      )
+      response.success
+        ? window.confirm('¿Desea ir a la página de la película?')
+            ? navigate(`/movies/${response.movie._id}`)
+            : navigate(0)
+        : window.alert('Error de addmovie')
+    }
   }
 
   return (
