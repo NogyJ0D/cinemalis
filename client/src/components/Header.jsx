@@ -8,11 +8,11 @@ const Header = () => {
   const { user } = store
 
   return (
-    <nav className='flex h-20 bg-black bg-opacity-80 justify-between px-14 mb-4 pt-2 items-center font-nunito shadow-2xl'>
+    <nav className='flex flex-col md:flex-row md:h-20 bg-black bg-opacity-80 md:justify-between md:px-14 mb-4 pt-2 items-center shadow-2xl'>
       <Link className='self-baseline' to='/'>
         <img src={HeadLogo} alt='Cinémalis' />
       </Link>
-      <div className='flex items-center gap-8'>
+      <div className='flex flex-col md:flex-row items-center gap-8'>
         <Link to='/movies' className='button'>Ver todas las películas</Link>
         <Link to='/dashboard' className={user?.userName ? 'block button' : 'hidden'}>
           {user ? user?.userName : ''}

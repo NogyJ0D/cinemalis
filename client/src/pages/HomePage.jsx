@@ -22,10 +22,10 @@ const HomePage = () => {
 
   return (
     <div className='flex flex-col gap-8'>
-      <div className='py-4 h-96 bg-black bg-opacity-70 mt-4 shadow-2xl'>
+      <div className='py-4 md:h-96 bg-black bg-opacity-70 mt-4 shadow-2xl'>
         <HomeCarousel />
       </div>
-      <div className='w-4/5 mx-auto flex justify-between text-white'>
+      <div className='md:w-4/5 mx-auto flex flex-col justify-between md:flex-row text-white'>
         <div className='w-96 rounded-md h-max bg-black bg-opacity-60 flex flex-col gap-2 p-2 items-center'>
           <h2 className='px-2 pt-2 text-2xl font-bold text-center'>Últimas agregadas</h2>
           {
