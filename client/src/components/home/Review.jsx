@@ -2,8 +2,7 @@ import React from 'react'
 import { format } from 'timeago.js'
 import { Link } from 'react-router-dom'
 import dateLocale from '../../services/dateLocale'
-
-import { Rating } from 'primereact/rating'
+import RatingStars from '../RatingStars'
 
 const Review = ({ movieId, userName, movie, rating, text, time }) => {
   return (
@@ -13,11 +12,9 @@ const Review = ({ movieId, userName, movie, rating, text, time }) => {
       </div>
       <p className='bg-white text-black p-2 rounded'>{text}</p>
       <div className='flex justify-between'>
-        <div className='flex gap-4'>
+        <div className='flex gap-2'>
           <h4 className='border rounded w-max px-2 py-1'>{userName}</h4>
-          <div className='border rounded w-max px-2 py-1 flex gap-2'>
-            <Rating value={rating} cancel={false} readonly style={{ color: 'White' }} />
-          </div>
+          <RatingStars rating={rating} />
         </div>
         <p className=''>{format(time, 'es')}</p>
       </div>

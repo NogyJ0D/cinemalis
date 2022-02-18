@@ -13,19 +13,17 @@ const MovieDetails = () => {
   const { user, movie } = store
 
   useEffect(async () => {
-    const response = await axiosRequest(
-      `http://localhost:4000/movies/${id}`, 'GET'
-    )
+    const response = await axiosRequest(`http://localhost:4000/movies/${id}`, 'GET')
     if (response.success) {
       const movie = response.movie
-      return dispatch({
+      dispatch({
         type: types.setMovie,
         payload: { id: movie._id, banner: movie.banner, description: movie.description, name: movie.name, poster: movie.poster, year: movie.year, rating: movie.rating, editor: movie.editor }
       })
     } else {
       navigate('/')
       dispatch({ type: types.resetMovie, payload: {} })
-      return window.alert('La película no existe')
+      window.alert('La película no existe')
     }
   }, [])
 
@@ -39,7 +37,7 @@ const MovieDetails = () => {
             <h4 className='text-lg'>{movie.description}</h4>
           </div>
           <div className='flex justify-between items-center'>
-            <Link to={`/movies/edit/${movie.id}`} className={movie.editor === user.id ? 'block button' : 'hidden'}>Editar</Link>
+            <Link to={`/movies/edit/${movie.id}`} className={movie.editor === user?.id ? 'block button' : 'hidden'}>Editar</Link>
             <h4 className='font-bold text-xl'>Lanzamiento: {movie.year}</h4>
             <div className='flex flex-col items-center w-max px-2'>
               <h5 className='font-semibold text-lg'>Puntuación Cinécritic</h5>

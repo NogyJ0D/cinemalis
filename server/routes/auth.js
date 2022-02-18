@@ -23,11 +23,11 @@ function auth (app) {
     }
   })
 
-  router.get('/tokenlogin', async (req, res) => {
+  router.post('/tokenlogin', async (req, res) => {
     const cookies = req.cookies
     const response = await authService.tokenLogin(cookies)
 
-    if (response.success === false) return res.status(401).json({ success: false, response })
+    if (response.success === false) return res.json({ success: false, response })
     else {
       return res
         .status(200)

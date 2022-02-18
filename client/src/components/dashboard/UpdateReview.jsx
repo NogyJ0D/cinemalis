@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import axiosRequest from '../../services/axiosRequest'
 
-const UpdateReview = ({ userRole, reviewId, movieId, movieName, text, rating, date }) => {
+const UpdateReview = ({ reviewId, movieId, movieName, text, rating, date }) => {
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
 

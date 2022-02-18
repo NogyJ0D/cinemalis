@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
-// import axios from 'axios'
 import axiosRequest from '../services/axiosRequest'
-
 import HomeCarousel from '../components/home/HomeCarousel'
 import Review from '../components/home/Review'
-// import RankingMovie from '../components/home/RankingMovie'
 import MovieDisplay from '../components/MovieDisplay'
 
 const HomePage = () => {

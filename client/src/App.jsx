@@ -17,7 +17,7 @@ const App = () => {
   const [store, dispatch] = useContext(GlobalContext)
 
   useEffect(async () => {
-    const response = await axiosRequest('http://localhost:4000/auth/tokenlogin', 'GET')
+    const response = await axiosRequest('http://localhost:4000/auth/tokenlogin', 'POST')
     if (response.success) {
       const userData = response.response.userData
       dispatch({

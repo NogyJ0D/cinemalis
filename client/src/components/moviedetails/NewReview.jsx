@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { InputTextarea } from 'primereact/inputtextarea'
-import { Rating } from 'primereact/rating'
 import { GlobalContext } from '../../context/GlobalContext'
 import axiosRequest from '../../services/axiosRequest'
 import { useForm } from 'react-hook-form'
+import RatingStars from '../RatingStars'
 
 const NewReview = () => {
   const navigate = useNavigate()
@@ -22,16 +21,12 @@ const NewReview = () => {
 
   return (
     <form className='flex flex-col gap-2' onSubmit={handleSubmit(onSubmit)}>
-      <div className='text-white font-bold text-xl flex gap-4 items-baseline'>
+      <div className='text-white font-bold text-xl flex gap-4 items-center'>
         <h2 className='border rounded w-max px-2 py-1'>{user.userName}</h2>
-        <div className='border rounded px-2 py-1 flex gap-4'>
-          <h4>Puntuación:</h4>
-          <Rating value={rating} onChange={(e) => setRating(e.value)} cancel={false} />
-          <label>({rating})</label>
-        </div>
+        <RatingStars rating={rating} setRating={setRating} />
         <button className='button ml-auto'>Enviar</button>
       </div>
-      <InputTextarea required {...register('text', { required: true })} placeholder='Reseña' />
+      <textarea className='text-black outline-none rounded-xl p-4' {...register('text', { required: true })} required placeholder='Reseña' />
     </form>
   )
 }

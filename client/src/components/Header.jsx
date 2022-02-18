@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import HeadLogo from '../assets/img/HeadLogo.svg'
 import { GlobalContext } from '../context/GlobalContext'
-import { InputText } from 'primereact/inputtext'
 
 const Header = () => {
   const [store, dispatch] = useContext(GlobalContext)

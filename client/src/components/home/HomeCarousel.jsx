@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { Carousel } from 'primereact/carousel'
 import axiosRequest from '../../services/axiosRequest'
 import { Link } from 'react-router-dom'
